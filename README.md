@@ -1,4 +1,4 @@
-# Taskit CLI
+# Taskit CLI (AI-assisted development)
 
 Taskit is a simple command-line interface for managing tasks. It allows you to add, list, edit, and clear tasks.
 
