@@ -29,7 +29,7 @@ def display_tasks(tasks):
     table = Table(title="Tasks")
     table.add_column("ID", justify="right", style="cyan", no_wrap=True)
     table.add_column("TODO", justify="left", style="cyan", no_wrap=True)
-    table.add_column("RUN", justify="left", style="magenta")
+    table.add_column("RUN", justify="left", style="yellow")
     table.add_column("DONE", justify="left", style="green")
 
     # Iterate over tasks and add a new row to the table for each task
