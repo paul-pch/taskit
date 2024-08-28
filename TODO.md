@@ -3,3 +3,4 @@
 * [ ] Ajouter la notion de priorisation des tâches
 * [ ] Ajouter une colonne review
 * [ ] Compresser les timestamp en code à 4 chiffres (avec potentiel lien jira ?)
+* [ ] A la creation mettre en TODO par défaut
