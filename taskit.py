@@ -59,7 +59,7 @@ def add(label: str, status: str = typer.Option("TODO", help="Task status (TODO, 
     id = int(time.time())
     tasks.append({"id": id, "label": label, "status": status})
     save_tasks(tasks)
-    console.print(f"Task {id} created successfully.")
+    display_tasks(tasks)
 
 # Function to edit a task
 @app.command()
@@ -72,7 +72,7 @@ def edit(id: int, label: str = None, status: str = None):
             if status is not None:
                 task["status"] = status
             save_tasks(tasks)
-            console.print(f"Task {id} updated successfully.")
+            display_tasks(tasks)
             return
     console.print(f"Task {id} not found.")
 
@@ -82,7 +82,16 @@ def clear():
     tasks = load_tasks()
     tasks = [task for task in tasks if task["status"] != "DONE"]
     save_tasks(tasks)
-    console.print("All tasks with status DONE have been removed.")
+    display_tasks(tasks)
+
+# Function to make all tasks "DONE"
+@app.command()
+def done():
+    tasks = load_tasks()
+    for task in tasks:
+        task["status"] = "DONE"
+    save_tasks(tasks)
+    display_tasks(tasks)
 
 # Command to list all tasks
 @app.command()
