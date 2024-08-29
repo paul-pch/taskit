@@ -30,27 +30,31 @@ def display_tasks(tasks):
     todo_count = sum(1 for task in tasks if task["status"] == "TODO")
     run_count = sum(1 for task in tasks if task["status"] == "RUN")
     done_count = sum(1 for task in tasks if task["status"] == "DONE")
+    review_count = sum(1 for task in tasks if task["status"] == "REVIEW")
 
     table = Table(title="Tasks")
     table.add_column("ID", justify="right", style="cyan", no_wrap=True)
     table.add_column(f"TODO ({todo_count})", justify="left", style="cyan", no_wrap=True)
     table.add_column(f"RUN ({run_count})", justify="left", style="yellow")
+    table.add_column(f"REVIEW ({review_count})", justify="left", style="magenta")
     table.add_column(f"DONE ({done_count})", justify="left", style="green")
 
     # Iterate over tasks and add a new row to the table for each task
     for task in tasks:
         if task["status"] == "TODO":
-            table.add_row(str(task["id"]), task["label"], "", "")
+            table.add_row(str(task["id"]), task["label"], "", "", "")
         elif task["status"] == "RUN":
-            table.add_row(str(task["id"]), "", task["label"], "")
+            table.add_row(str(task["id"]), "", task["label"], "", "")
+        elif task["status"] == "REVIEW":
+            table.add_row(str(task["id"]), "", "", task["label"], "")
         elif task["status"] == "DONE":
-            table.add_row(str(task["id"]), "", "", task["label"])
+            table.add_row(str(task["id"]), "", "", "", task["label"])
 
     console.print(table)
 
 # Function to add a new task
 @app.command()
-def add(label: str, status: str = typer.Option("TODO", help="Task status (TODO, RUN, DONE)")):
+def add(label: str, status: str = typer.Option("TODO", help="Task status (TODO, RUN, REVIEW, DONE)")):
     tasks = load_tasks()
     id = int(time.time())
     tasks.append({"id": id, "label": label, "status": status})
