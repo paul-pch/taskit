@@ -26,11 +26,16 @@ def save_tasks(tasks):
 
 # Function to display tasks
 def display_tasks(tasks):
+    # Count the number of tasks in each status
+    todo_count = sum(1 for task in tasks if task["status"] == "TODO")
+    run_count = sum(1 for task in tasks if task["status"] == "RUN")
+    done_count = sum(1 for task in tasks if task["status"] == "DONE")
+
     table = Table(title="Tasks")
     table.add_column("ID", justify="right", style="cyan", no_wrap=True)
-    table.add_column("TODO", justify="left", style="cyan", no_wrap=True)
-    table.add_column("RUN", justify="left", style="yellow")
-    table.add_column("DONE", justify="left", style="green")
+    table.add_column(f"TODO ({todo_count})", justify="left", style="cyan", no_wrap=True)
+    table.add_column(f"RUN ({run_count})", justify="left", style="yellow")
+    table.add_column(f"DONE ({done_count})", justify="left", style="green")
 
     # Iterate over tasks and add a new row to the table for each task
     for task in tasks:
